@@ -1,4 +1,7 @@
+using cw.applicationservice.addproduct;
+using cw.applicationservice.interfaces;
 using cw.Helpers;
+using cw.infrastructure.network;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +14,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IADProductService, ADProductService>();
+builder.Services.AddScoped<IBotAPIService, BotApiService>();
 string? connectionString = builder.Configuration.GetConnectionString("DBConn");
 builder.Services.AddDbContext<CWDbContext>(options =>{
     options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
